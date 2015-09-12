@@ -6,6 +6,8 @@
 
 var fs = require('fs');
 
+let description = '';
+
 function readFile(filepath) {
     try {
         return fs.readFileSync(filepath, { "encoding": "utf-8" });
@@ -14,14 +16,15 @@ function readFile(filepath) {
     }
 }
 
-function sclToFrequencies(baseNote, baseFrequency, fileName) {
-
+let sclTuning = (fileName, baseNote, baseFrequency) => {
+    baseNote = baseNote || 48;
+    baseFrequency = baseFrequency || 261.625565300598623;
+//    if (!fileName) return;
     let tunings = [];
     let counter = 0;
     let file = readFile(fileName);
     let lines = file.split('\n');
-    let description = '';
-
+    console.log(lines);
     if (file) {
         for (let i = 0, ln = lines.length; i < ln; i++) {
             if (lines[i].substring(0,1) !== '!' && lines[i].replace(/\s/g, '')) {
@@ -40,35 +43,29 @@ function sclToFrequencies(baseNote, baseFrequency, fileName) {
                 }
             }
         }
-    } else {
-        console.log('Hmmm... The .scl file did not load for some reason.');
     }
+    return tuningToFrequencies(tunings, baseNote, baseFrequency);
+}
 
-    // Generate object containe all 128 MIDI note frequencies
-    var notesPerOctave = Object.keys(tunings).length;
-    var frequencies = [];
-    for (var i = 0; i < 128; i++) {
-        var note = i - baseNote;
-        var degree = Math.abs(note % notesPerOctave);
-        var octave = Math.floor(note / notesPerOctave);
-        var frequency = baseFrequency * Math.pow(tunings[notesPerOctave - 1], 
+let tuningToFrequencies = (tuning, baseNote, baseFrequency) => {
+    console.log(tuning);
+    console.log(baseNote);
+    console.log(baseFrequency);
+    let notesPerOctave = Object.keys(tuning).length;
+    let frequencies = [];
+    for (let i = 0; i < 128; i++) {
+        let note = i - baseNote;
+        let degree = Math.abs(note % notesPerOctave);
+        let octave = Math.floor(note / notesPerOctave);
+        let frequency = baseFrequency * Math.pow(tuning[notesPerOctave - 1], 
                 (octave * notesPerOctave) / notesPerOctave);
-        if (degree > 0) frequency *= tunings[degree - 1];
+        if (degree > 0) frequency *= tuning[degree - 1];
         frequency = Math.max(0.0, Math.min(22050.0, frequency));
         frequencies.push(frequency);
     }
     return frequencies.sort((a, b) => a - b);
 }
 
-// C-4
-const baseNote = 48;
+module.exports = sclTuning;
 
-// Middle C
-const baseFrequency = 261.625565300598623000;
-
-// .scl filename
-const fileName = process.argv[2];
-
-var frequencies = sclToFrequencies(baseNote, baseFrequency, fileName);
-
-console.log(frequencies);
+//console.log(sclTuning('~/Downloads/scl/abell1.scl'));
