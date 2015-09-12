@@ -11,5 +11,6 @@
     "huygens-fokker"
   ],
   "author": "Joseph Post <joe@jcpst.com> (http://jcpst.com)",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": "jcpst/scl-to-frequency"
 }
