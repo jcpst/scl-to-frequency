@@ -19,12 +19,10 @@ function readFile(filepath) {
 let sclTuning = (fileName, baseNote, baseFrequency) => {
     baseNote = baseNote || 48;
     baseFrequency = baseFrequency || 261.625565300598623;
-//    if (!fileName) return;
     let tunings = [];
     let counter = 0;
     let file = readFile(fileName);
     let lines = file.split('\n');
-    console.log(lines);
     if (file) {
         for (let i = 0, ln = lines.length; i < ln; i++) {
             if (lines[i].substring(0,1) !== '!' && lines[i].replace(/\s/g, '')) {
@@ -48,9 +46,6 @@ let sclTuning = (fileName, baseNote, baseFrequency) => {
 }
 
 let tuningToFrequencies = (tuning, baseNote, baseFrequency) => {
-    console.log(tuning);
-    console.log(baseNote);
-    console.log(baseFrequency);
     let notesPerOctave = Object.keys(tuning).length;
     let frequencies = [];
     for (let i = 0; i < 128; i++) {
@@ -68,4 +63,3 @@ let tuningToFrequencies = (tuning, baseNote, baseFrequency) => {
 
 module.exports = sclTuning;
 
-//console.log(sclTuning('~/Downloads/scl/abell1.scl'));
