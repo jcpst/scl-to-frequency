@@ -23,3 +23,4 @@ scl('/path/to/scl/file');
 scl('/path/to/scl/file', 48, 261.625565300598623);
 ```
 
+[1]: http://www.huygens-fokker.org/scala/
