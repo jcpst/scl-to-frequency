@@ -1,0 +1,19 @@
+{
+  "name": "scala-tuning",
+  "version": "1.0.0",
+  "description": "Application for browsing and analizing Scala (.scl) tunings.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Joseph Post <joe@jcpst.com> (http://jcpst.com)",
+  "license": "ISC",
+  "devDependencies": {
+    "backbone": "^1.2.3",
+    "jquery": "^2.1.4",
+    "request": "^2.61.0",
+    "underscore": "^1.8.3",
+    "zip-local": "^0.1.3"
+  }
+}
