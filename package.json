@@ -1,13 +1,13 @@
 {
   "name": "scl-to-frequency",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Convert Scala (.scl) tunings to MIDI note frequencies.",
   "main": "index.js",
   "keywords": [
     "scala",
-    ".scl", 
-    "microtonal", 
-    "tuning", 
+    ".scl",
+    "microtonal",
+    "tuning",
     "huygens-fokker"
   ],
   "author": "Joseph Post <joe@jcpst.com> (http://jcpst.com)",
