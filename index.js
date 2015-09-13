@@ -8,7 +8,7 @@ var fs = require('fs');
 
 let description = '';
 
-function readFile(filepath) {
+let readFile = (filepath) => {
     try {
         return fs.readFileSync(filepath, { "encoding": "utf-8" });
     } catch (e) { 
